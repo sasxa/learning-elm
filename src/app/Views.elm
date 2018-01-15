@@ -1,10 +1,9 @@
 module Views exposing (..)
 
 import Html exposing (Html, div, text)
-import Messages exposing (Msg(..))
-import Models exposing (Model)
+import Types exposing (Model, Msg(..))
 
 
 view : Model -> Html Msg
 view model =
-    div [] [ text "It works!" ]
+    div [] [ text (toString model) ]

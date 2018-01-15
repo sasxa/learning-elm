@@ -1,35 +1,47 @@
 module Main exposing (..)
 
-import Html exposing (program)
-import Messages exposing (Msg(..))
-import Models exposing (Model)
+import Types exposing (Model, Flags, initialState, Msg(..))
+import Navigation exposing (Location)
 import Updates exposing (update)
 import Views exposing (view)
+import Stack
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( Model, Cmd.none )
+{--SIGNATURES FOR PROGRAM
 
+    init : Flags -> Location -> ( Model, Cmd Msg )
+    update : Msg -> Model -> ( Model, Cmd Msg )
+    view : Model -> Html Msg
 
-
+--}
 -- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    -- Sub.none
+    Sub.batch [ Stack.subscriptions model.stack ]
+
+
+
+-- INIT
+
+
+init : Flags -> Location -> ( Model, Cmd Msg )
+init flags location =
+    update (UrlChange location) (initialState flags location)
 
 
 
 -- MAIN
 
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    program
+    Navigation.programWithFlags UrlChange
+        -- Navigation.program UrlChange
         { init = init
-        , view = view
-        , update = update
         , subscriptions = subscriptions
+        , update = update
+        , view = view
         }
