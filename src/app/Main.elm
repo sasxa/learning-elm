@@ -19,11 +19,11 @@ import Stack
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    -- Sub.none
-    Sub.batch [ Stack.subscriptions model.stack ]
+    Sub.map StackMsg (Stack.subscriptions model.stack)
 
 
 
+-- Sub.none
 -- INIT
 
 

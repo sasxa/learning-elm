@@ -1,4 +1,7 @@
-module Stack exposing (State, Msg(..), update)
+-- module Stack exposing (State, Msg(..), update, init, view, subscriptions)
+
+
+module Stack exposing (..)
 
 {--| Generic Stack Container.
 Can be used for multiple toast notifications

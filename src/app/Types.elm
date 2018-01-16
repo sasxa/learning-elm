@@ -10,7 +10,7 @@ import Stack
 type Msg
     = Noop
     | UrlChange Location
-    | StackMsg Stack.Msg.AddStackItem
+    | StackMsg Stack.Msg
 
 
 
@@ -39,4 +39,4 @@ type alias Model =
 
 initialState : Flags -> Location -> Model
 initialState flags location =
-    Model flags location []
+    Model flags location (Tuple.first Stack.init)

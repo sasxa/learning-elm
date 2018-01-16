@@ -22,9 +22,14 @@ update msg model =
         UrlChange location ->
             debugMessage "location" location model
 
-        Stack.Msg.AddStackItem ->
-            Stack.update Stack.Msg.AddStackItem model.stack
+        StackMsg msg ->
+            let
+                ( state, command ) =
+                    Stack.update msg model.stack
+            in
+                ( { model | stack = state }, Cmd.map StackMsg command )
 
 
 
+-- Stack.update Stack.Msg.AddStackItem model.stack
 -- ( model, Cmd.none )
